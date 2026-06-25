@@ -365,7 +365,7 @@
       width: min(1180px, calc(100% - 32px));
       margin: 42px auto -54px;
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(4, minmax(0, 1fr));
       border-radius: 8px;
       overflow: hidden;
       box-shadow: var(--shadow);
@@ -373,10 +373,15 @@
 
     .ribbon-item {
       min-height: 116px;
-      padding: 20px;
+      min-width: 0;
+      padding: 18px 16px;
       color: var(--navy);
       background: var(--yellow);
+      font-size: clamp(0.95rem, 1.25vw, 1.08rem);
       font-weight: 900;
+      line-height: 1.22;
+      overflow-wrap: anywhere;
+      word-break: normal;
     }
 
     .ribbon-item:nth-child(2) {
@@ -968,6 +973,7 @@
       border-top: 1px solid rgba(255, 255, 255, 0.16);
       color: rgba(255, 255, 255, 0.72);
       font-weight: 700;
+      text-align: center;
     }
 
     @media (max-width: 1060px) {
@@ -975,8 +981,7 @@
         grid-template-columns: repeat(3, 1fr);
       }
 
-      .impact-grid,
-      .hero-ribbon {
+      .impact-grid {
         grid-template-columns: repeat(2, 1fr);
       }
     }
@@ -1045,6 +1050,10 @@
 
       .about {
         padding-top: 120px;
+      }
+
+      .hero-ribbon {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
       .involved-grid,
