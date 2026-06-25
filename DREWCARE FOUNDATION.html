@@ -1,0 +1,1536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DrewCare Foundation | Special Care for Every Child</title>
+  <meta name="description" content="DrewCare Foundation supports children with special needs through assessment, therapy, caregiver training, and inclusive school support.">
+  <style>
+    :root {
+      --navy: #11375c;
+      --blue: #1479d4;
+      --cyan: #00bcd4;
+      --yellow: #ffd23f;
+      --pink: #ff5fa2;
+      --green: #40c057;
+      --orange: #ff8a00;
+      --cream: #fff8e8;
+      --white: #ffffff;
+      --ink: #1b2633;
+      --muted: #5e6b78;
+      --line: rgba(17, 55, 92, 0.14);
+      --shadow: 0 18px 45px rgba(17, 55, 92, 0.16);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.6;
+      background: var(--white);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    .topbar {
+      background: var(--navy);
+      color: var(--white);
+      font-size: 0.9rem;
+    }
+
+    .topbar-inner,
+    .nav-inner,
+    .section-inner {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .topbar-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 8px 0;
+      flex-wrap: wrap;
+    }
+
+    .socials {
+      display: flex;
+      gap: 12px;
+      font-weight: 700;
+    }
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(255, 255, 255, 0.96);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(14px);
+    }
+
+    .nav-inner {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--navy);
+      font-weight: 900;
+      letter-spacing: 0;
+      white-space: nowrap;
+    }
+
+    .brand-mark {
+      display: grid;
+      place-items: center;
+      width: 46px;
+      height: 46px;
+      color: var(--navy);
+      background: linear-gradient(135deg, var(--yellow), var(--pink));
+      border: 4px solid var(--cyan);
+      border-radius: 8px;
+      font-size: 1.35rem;
+      box-shadow: 5px 5px 0 var(--green);
+    }
+
+    .brand-text strong {
+      display: block;
+      font-size: 1.15rem;
+      line-height: 1.1;
+    }
+
+    .brand-text span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.75rem;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .nav-toggle {
+      display: none;
+      width: 44px;
+      height: 44px;
+      border: 0;
+      border-radius: 8px;
+      background: var(--yellow);
+      color: var(--navy);
+      font-size: 1.4rem;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .nav-toggle span,
+    .nav-toggle::before,
+    .nav-toggle::after {
+      content: "";
+      display: block;
+      width: 21px;
+      height: 3px;
+      margin: 3px auto;
+      border-radius: 999px;
+      background: currentColor;
+      transition: 0.2s ease;
+    }
+
+    .nav-toggle.open span {
+      opacity: 0;
+    }
+
+    .nav-toggle.open::before {
+      transform: translateY(6px) rotate(45deg);
+    }
+
+    .nav-toggle.open::after {
+      transform: translateY(-6px) rotate(-45deg);
+    }
+
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav-link {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding: 26px 10px;
+      color: var(--navy);
+      font-size: 0.93rem;
+      font-weight: 800;
+    }
+
+    .nav-link:hover {
+      color: var(--pink);
+    }
+
+    .dropdown {
+      position: relative;
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      min-width: 260px;
+      list-style: none;
+      margin: 0;
+      padding: 10px;
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-top: 5px solid var(--pink);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+      transition: 0.2s ease;
+    }
+
+    .dropdown:hover .dropdown-menu,
+    .dropdown:focus-within .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .dropdown-menu a {
+      display: block;
+      padding: 10px 12px;
+      border-radius: 6px;
+      color: var(--ink);
+      font-weight: 700;
+    }
+
+    .dropdown-menu a:hover {
+      background: #e8f7fb;
+      color: var(--navy);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 12px 20px;
+      border: 0;
+      border-radius: 8px;
+      color: var(--navy);
+      background: var(--yellow);
+      font-weight: 900;
+      box-shadow: 6px 6px 0 var(--navy);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: translate(2px, 2px);
+      box-shadow: 3px 3px 0 var(--navy);
+    }
+
+    .btn.alt {
+      color: var(--white);
+      background: var(--pink);
+      box-shadow: 6px 6px 0 var(--yellow);
+    }
+
+    .btn.ghost {
+      color: var(--white);
+      background: transparent;
+      border: 2px solid rgba(255, 255, 255, 0.72);
+      box-shadow: none;
+    }
+
+    .hero {
+      min-height: calc(100vh - 112px);
+      display: grid;
+      align-items: end;
+      color: var(--white);
+      background:
+        linear-gradient(90deg, rgba(17, 55, 92, 0.92), rgba(17, 55, 92, 0.55) 48%, rgba(255, 95, 162, 0.34)),
+        url("https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1800&q=80") center/cover;
+    }
+
+    .hero-inner {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 92px 0 46px;
+    }
+
+    .hero-copy {
+      max-width: 720px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin: 0 0 14px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      color: var(--navy);
+      background: var(--yellow);
+      font-size: 0.82rem;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    h1 {
+      max-width: 760px;
+      margin-bottom: 18px;
+      font-size: clamp(2.75rem, 7vw, 6.8rem);
+      line-height: 0.95;
+      letter-spacing: 0;
+    }
+
+    .hero-copy > p {
+      max-width: 620px;
+      margin-bottom: 28px;
+      color: rgba(255, 255, 255, 0.92);
+      font-size: clamp(1.05rem, 1.6vw, 1.3rem);
+    }
+
+    .hero-actions,
+    .section-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .hero-ribbon {
+      width: min(1180px, calc(100% - 32px));
+      margin: 42px auto -54px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .ribbon-item {
+      min-height: 116px;
+      padding: 20px;
+      color: var(--navy);
+      background: var(--yellow);
+      font-weight: 900;
+    }
+
+    .ribbon-item:nth-child(2) {
+      background: var(--cyan);
+      color: var(--white);
+    }
+
+    .ribbon-item:nth-child(3) {
+      background: var(--pink);
+      color: var(--white);
+    }
+
+    .ribbon-item:nth-child(4) {
+      background: var(--green);
+      color: var(--white);
+    }
+
+    .ribbon-item span {
+      display: block;
+      font-size: 1.65rem;
+      line-height: 1;
+    }
+
+    section {
+      padding: 92px 0;
+    }
+
+    .section-title {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(260px, 460px);
+      gap: 28px;
+      align-items: end;
+      margin-bottom: 34px;
+    }
+
+    .section-title h2 {
+      margin-bottom: 0;
+      color: var(--navy);
+      font-size: clamp(2rem, 4vw, 4rem);
+      line-height: 1.02;
+    }
+
+    .section-title p {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .about {
+      padding-top: 136px;
+      background: var(--cream);
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: 0.94fr 1.06fr;
+      gap: 42px;
+      align-items: center;
+    }
+
+    .photo-stack {
+      display: grid;
+      gap: 14px;
+    }
+
+    .photo-main {
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      border-radius: 8px;
+      border: 8px solid var(--white);
+      box-shadow: var(--shadow);
+    }
+
+    .mini-strip {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .mini-strip img {
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .about-copy h2 {
+      color: var(--navy);
+      font-size: clamp(2rem, 4vw, 4rem);
+      line-height: 1.02;
+    }
+
+    .about-copy p {
+      color: var(--muted);
+      font-size: 1.04rem;
+      font-weight: 700;
+    }
+
+    .pill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 0;
+      margin: 24px 0 28px;
+      list-style: none;
+    }
+
+    .pill-list li {
+      padding: 8px 12px;
+      border-radius: 999px;
+      color: var(--navy);
+      background: var(--white);
+      border: 2px solid var(--line);
+      font-weight: 900;
+    }
+
+    .programs {
+      background: var(--white);
+    }
+
+    .program-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 16px;
+    }
+
+    .program-card {
+      min-height: 250px;
+      padding: 22px;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      background: var(--white);
+      box-shadow: 0 12px 30px rgba(17, 55, 92, 0.08);
+    }
+
+    .program-card:nth-child(1) {
+      border-top: 8px solid var(--pink);
+    }
+
+    .program-card:nth-child(2) {
+      border-top: 8px solid var(--cyan);
+    }
+
+    .program-card:nth-child(3) {
+      border-top: 8px solid var(--green);
+    }
+
+    .program-card:nth-child(4) {
+      border-top: 8px solid var(--yellow);
+    }
+
+    .program-card:nth-child(5) {
+      border-top: 8px solid var(--orange);
+    }
+
+    .program-icon {
+      display: grid;
+      place-items: center;
+      width: 54px;
+      height: 54px;
+      margin-bottom: 16px;
+      border-radius: 8px;
+      color: var(--white);
+      background: var(--navy);
+      font-size: 1.6rem;
+      font-weight: 900;
+    }
+
+    .program-card h3 {
+      color: var(--navy);
+      font-size: 1.18rem;
+      line-height: 1.18;
+    }
+
+    .program-card p {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .feature-band {
+      color: var(--white);
+      background:
+        linear-gradient(90deg, rgba(17, 55, 92, 0.95), rgba(20, 121, 212, 0.82)),
+        url("https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=1800&q=80") center/cover fixed;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      align-items: center;
+    }
+
+    .feature-band h2 {
+      margin-bottom: 18px;
+      font-size: clamp(2rem, 4vw, 4.3rem);
+      line-height: 1.04;
+    }
+
+    .feature-band p {
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 1.08rem;
+      font-weight: 700;
+    }
+
+    .check-list {
+      display: grid;
+      gap: 12px;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .check-list li {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      padding: 14px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      font-weight: 800;
+    }
+
+    .check-list span {
+      display: grid;
+      place-items: center;
+      flex: 0 0 28px;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      color: var(--navy);
+      background: var(--yellow);
+      line-height: 1;
+    }
+
+    .impact {
+      background: #eafaff;
+    }
+
+    .impact-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .impact-card {
+      padding: 24px;
+      border-radius: 8px;
+      color: var(--navy);
+      background: var(--white);
+      border-bottom: 8px solid var(--cyan);
+      box-shadow: 0 12px 28px rgba(17, 55, 92, 0.08);
+    }
+
+    .impact-card strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      line-height: 1;
+    }
+
+    .impact-card span {
+      color: var(--muted);
+      font-weight: 900;
+    }
+
+    .involved {
+      background: var(--white);
+    }
+
+    .involved-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .involved-card {
+      min-height: 380px;
+      display: grid;
+      align-content: end;
+      padding: 24px;
+      border-radius: 8px;
+      overflow: hidden;
+      color: var(--white);
+      background: linear-gradient(180deg, rgba(17, 55, 92, 0.08), rgba(17, 55, 92, 0.92)), var(--photo) center/cover;
+    }
+
+    .involved-card h3 {
+      margin-bottom: 8px;
+      font-size: 1.55rem;
+    }
+
+    .involved-card p {
+      color: rgba(255, 255, 255, 0.9);
+      font-weight: 700;
+    }
+
+    .donate {
+      color: var(--navy);
+      background: linear-gradient(135deg, #fff2a8, #ffe3f0 48%, #d8fbff);
+    }
+
+    .donate-grid {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 34px;
+      align-items: center;
+    }
+
+    .donate-copy h2 {
+      margin-bottom: 16px;
+      font-size: clamp(2rem, 4vw, 4rem);
+      line-height: 1.02;
+    }
+
+    .donate-copy p {
+      color: var(--muted);
+      font-weight: 800;
+    }
+
+    .donate-list {
+      display: grid;
+      gap: 12px;
+      padding: 0;
+      margin: 24px 0 0;
+      list-style: none;
+      font-weight: 900;
+    }
+
+    .donate-list li {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      padding: 12px 14px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid var(--line);
+    }
+
+    .donation-form {
+      display: grid;
+      gap: 14px;
+      padding: 22px;
+      border-radius: 8px;
+      background: var(--white);
+      box-shadow: var(--shadow);
+    }
+
+    .amount-presets {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    .amount-presets button {
+      min-height: 44px;
+      border: 2px solid var(--line);
+      border-radius: 8px;
+      color: var(--navy);
+      background: #f8fbff;
+      font: inherit;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .amount-presets button.active,
+    .amount-presets button:hover {
+      border-color: var(--pink);
+      background: var(--yellow);
+    }
+
+    .donation-form label {
+      display: grid;
+      gap: 6px;
+      color: var(--navy);
+      font-weight: 900;
+    }
+
+    .donation-form input,
+    .donation-form select {
+      width: 100%;
+      min-height: 48px;
+      border: 2px solid var(--line);
+      border-radius: 8px;
+      padding: 10px 12px;
+      color: var(--ink);
+      font: inherit;
+    }
+
+    .donation-fields {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .form-note,
+    .donation-message {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.92rem;
+      font-weight: 800;
+    }
+
+    .donation-message {
+      min-height: 24px;
+      color: var(--navy);
+    }
+
+    .stories {
+      background: var(--cream);
+    }
+
+    .story-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 22px;
+    }
+
+    .story-lead,
+    .story-side {
+      border-radius: 8px;
+      overflow: hidden;
+      background: var(--white);
+      box-shadow: 0 12px 28px rgba(17, 55, 92, 0.08);
+    }
+
+    .story-lead img {
+      width: 100%;
+      height: 330px;
+      object-fit: cover;
+    }
+
+    .story-body {
+      padding: 24px;
+    }
+
+    .story-body h3 {
+      color: var(--navy);
+      font-size: 1.6rem;
+      line-height: 1.15;
+    }
+
+    .story-body p {
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .story-side {
+      display: grid;
+      gap: 0;
+    }
+
+    .story-mini {
+      display: grid;
+      grid-template-columns: 135px 1fr;
+      gap: 16px;
+      padding: 16px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .story-mini:last-child {
+      border-bottom: 0;
+    }
+
+    .story-mini img {
+      width: 135px;
+      height: 110px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .story-mini h3 {
+      margin-bottom: 6px;
+      color: var(--navy);
+      font-size: 1.05rem;
+      line-height: 1.18;
+    }
+
+    .story-mini p {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 0.92rem;
+      font-weight: 700;
+    }
+
+    .contact {
+      color: var(--white);
+      background: var(--navy);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 36px;
+      align-items: start;
+    }
+
+    .contact h2 {
+      font-size: clamp(2rem, 4vw, 4rem);
+      line-height: 1.02;
+    }
+
+    .contact p {
+      color: rgba(255, 255, 255, 0.82);
+      font-weight: 700;
+    }
+
+    .contact-list {
+      display: grid;
+      gap: 12px;
+      padding: 0;
+      margin: 24px 0 0;
+      list-style: none;
+      font-weight: 800;
+    }
+
+    .contact-form {
+      display: grid;
+      gap: 12px;
+      padding: 20px;
+      border-radius: 8px;
+      background: var(--white);
+    }
+
+    .contact-form label {
+      display: grid;
+      gap: 6px;
+      color: var(--navy);
+      font-weight: 900;
+    }
+
+    .contact-form input,
+    .contact-form textarea,
+    .newsletter input {
+      width: 100%;
+      min-height: 48px;
+      border: 2px solid var(--line);
+      border-radius: 8px;
+      padding: 10px 12px;
+      color: var(--ink);
+      font: inherit;
+    }
+
+    .contact-form textarea {
+      min-height: 118px;
+      resize: vertical;
+    }
+
+    footer {
+      color: var(--white);
+      background: #08233d;
+      padding: 34px 0;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.8fr 0.9fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    .footer-grid h3 {
+      margin-bottom: 10px;
+      color: var(--yellow);
+    }
+
+    .footer-grid p,
+    .footer-grid a {
+      color: rgba(255, 255, 255, 0.82);
+      font-weight: 700;
+    }
+
+    .footer-links {
+      display: grid;
+      gap: 8px;
+    }
+
+    .newsletter {
+      display: grid;
+      gap: 10px;
+    }
+
+    .copyright {
+      width: min(1180px, calc(100% - 32px));
+      margin: 28px auto 0;
+      padding-top: 18px;
+      border-top: 1px solid rgba(255, 255, 255, 0.16);
+      color: rgba(255, 255, 255, 0.72);
+      font-weight: 700;
+    }
+
+    @media (max-width: 1060px) {
+      .program-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .impact-grid,
+      .hero-ribbon {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 840px) {
+      .nav-toggle {
+        display: grid;
+        place-items: center;
+      }
+
+      .nav-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        display: none;
+        align-items: stretch;
+        flex-direction: column;
+        gap: 0;
+        padding: 10px 16px 18px;
+        background: var(--white);
+        border-bottom: 1px solid var(--line);
+        box-shadow: var(--shadow);
+      }
+
+      .nav-menu.open {
+        display: flex;
+      }
+
+      .nav-link {
+        padding: 12px 6px;
+      }
+
+      .dropdown-menu {
+        position: static;
+        display: none;
+        min-width: 0;
+        box-shadow: none;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+      }
+
+      .dropdown:hover .dropdown-menu,
+      .dropdown:focus-within .dropdown-menu {
+        display: block;
+      }
+
+      .hero {
+        min-height: auto;
+      }
+
+      .hero-inner {
+        padding: 82px 0 40px;
+      }
+
+      .section-title,
+      .split,
+      .feature-grid,
+      .donate-grid,
+      .story-grid,
+      .contact-grid,
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .about {
+        padding-top: 120px;
+      }
+
+      .involved-grid,
+      .program-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .topbar-inner {
+        display: none;
+      }
+
+      .nav-inner {
+        min-height: 68px;
+      }
+
+      .brand-text strong {
+        font-size: 1rem;
+      }
+
+      .brand-text span {
+        font-size: 0.68rem;
+      }
+
+      h1 {
+        font-size: 3rem;
+      }
+
+      .hero-ribbon,
+      .impact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .story-mini {
+        grid-template-columns: 1fr;
+      }
+
+      .amount-presets,
+      .donation-fields {
+        grid-template-columns: 1fr;
+      }
+
+      .story-mini img {
+        width: 100%;
+        height: 180px;
+      }
+
+      section {
+        padding: 68px 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="topbar-inner">
+      <span>Care line: +234 000 000 0000 | hello@drewcarefoundation.org</span>
+      <span class="socials" aria-label="Social links">
+        <a href="#contact">Facebook</a>
+        <a href="#contact">Instagram</a>
+        <a href="#contact">LinkedIn</a>
+      </span>
+    </div>
+  </div>
+
+  <header class="navbar">
+    <nav class="nav-inner" aria-label="Main navigation">
+      <a class="brand" href="#home" aria-label="DrewCare Foundation home">
+        <span class="brand-mark">DC</span>
+        <span class="brand-text">
+          <strong>DrewCare Foundation</strong>
+          <span>Special care for kids</span>
+        </span>
+      </a>
+
+      <button class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false"><span></span></button>
+
+      <ul class="nav-menu">
+        <li><a class="nav-link" href="#home">Home</a></li>
+        <li class="dropdown">
+          <a class="nav-link" href="#about">About Us +</a>
+          <ul class="dropdown-menu">
+            <li><a href="#about">Who We Are</a></li>
+            <li><a href="#impact">Our Impact</a></li>
+            <li><a href="#stories">Stories</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a class="nav-link" href="#programs">What We Do +</a>
+          <ul class="dropdown-menu">
+            <li><a href="#programs">Special Needs Assessment</a></li>
+            <li><a href="#programs">Speech Therapy</a></li>
+            <li><a href="#programs">Physiotherapy</a></li>
+            <li><a href="#programs">Parent &amp; Caregiver Training</a></li>
+            <li><a href="#programs">School Support &amp; Inclusion</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a class="nav-link" href="#involved">Get Involved +</a>
+          <ul class="dropdown-menu">
+            <li><a href="#donate">Donate Now</a></li>
+            <li><a href="#contact">Volunteer</a></li>
+            <li><a href="#contact">Partner With Us</a></li>
+            <li><a href="#contact">Refer a Child</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a class="nav-link" href="#stories">Resources +</a>
+          <ul class="dropdown-menu">
+            <li><a href="#stories">Parent Resources</a></li>
+            <li><a href="#stories">Events</a></li>
+            <li><a href="#stories">Gallery</a></li>
+          </ul>
+        </li>
+        <li><a class="nav-link" href="#contact">Contact</a></li>
+        <li><a class="btn" href="#donate">Donate Now</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="home">
+    <section class="hero" aria-label="DrewCare Foundation hero">
+      <div class="hero-inner">
+        <div class="hero-copy">
+          <p class="eyebrow">Learning. Therapy. Inclusion.</p>
+          <h1>DrewCare Foundation</h1>
+          <p>We help children with special needs learn, communicate, move, and belong through early assessment, therapy, caregiver support, and inclusive school partnerships.</p>
+          <div class="hero-actions">
+            <a class="btn" href="#programs">Explore Our Programs</a>
+            <a class="btn ghost" href="#contact">Refer a Child</a>
+          </div>
+        </div>
+        <div class="hero-ribbon" aria-label="Foundation highlights">
+          <div class="ribbon-item"><span>01</span>Assess each child's needs</div>
+          <div class="ribbon-item"><span>02</span>Build therapy plans</div>
+          <div class="ribbon-item"><span>03</span>Train families and teachers</div>
+          <div class="ribbon-item"><span>04</span>Support inclusive classrooms</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="about" id="about">
+      <div class="section-inner split">
+        <div class="photo-stack">
+          <img class="photo-main" src="https://images.unsplash.com/photo-1497486751825-1233686d5d80?auto=format&fit=crop&w=1200&q=80" alt="Children reading together in a classroom">
+          <div class="mini-strip">
+            <img src="https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=800&q=80" alt="Child learning with classroom materials">
+            <img src="https://images.unsplash.com/photo-1603357465999-241beecc2629?auto=format&fit=crop&w=800&q=80" alt="Kids studying with books and pencils">
+          </div>
+        </div>
+        <div class="about-copy">
+          <p class="eyebrow">Who we are</p>
+          <h2>A cheerful support system for children who need extra care.</h2>
+          <p>DrewCare Foundation exists for children whose learning, speech, movement, sensory, or developmental needs require patient attention. We work with families, schools, therapists, and volunteers so children can grow with dignity and confidence.</p>
+          <ul class="pill-list">
+            <li>Early intervention</li>
+            <li>Family guidance</li>
+            <li>Inclusive education</li>
+            <li>Child-centered therapy</li>
+          </ul>
+          <div class="section-actions">
+            <a class="btn alt" href="#involved">Partner With Us</a>
+            <a class="btn" href="#stories">Read Stories</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="programs" id="programs">
+      <div class="section-inner">
+        <div class="section-title">
+          <h2>What We Do</h2>
+          <p>These services are drawn from the DrewCare brief: practical care pathways that help each child receive the right support at home and in school.</p>
+        </div>
+        <div class="program-grid">
+          <article class="program-card">
+            <div class="program-icon">A</div>
+            <h3>Special Needs Assessment</h3>
+            <p>We observe strengths, challenges, learning patterns, communication needs, and family goals before building a support plan.</p>
+          </article>
+          <article class="program-card">
+            <div class="program-icon">S</div>
+            <h3>Speech Therapy</h3>
+            <p>Children receive guided support for speech, language, listening, social communication, and confidence in expression.</p>
+          </article>
+          <article class="program-card">
+            <div class="program-icon">P</div>
+            <h3>Physiotherapy</h3>
+            <p>Movement, balance, posture, coordination, and daily functional activities are supported through child-friendly sessions.</p>
+          </article>
+          <article class="program-card">
+            <div class="program-icon">C</div>
+            <h3>Parent &amp; Caregiver Training</h3>
+            <p>Families learn routines, communication tools, home exercises, behavior support, and ways to celebrate steady progress.</p>
+          </article>
+          <article class="program-card">
+            <div class="program-icon">I</div>
+            <h3>School Support &amp; Inclusion Programs</h3>
+            <p>We help schools adapt classrooms, support teachers, reduce stigma, and create learning environments where children belong.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="feature-band">
+      <div class="section-inner feature-grid">
+        <div>
+          <p class="eyebrow">Our approach</p>
+          <h2>Care plans that connect therapy, home, and school.</h2>
+          <p>Children make stronger progress when everyone around them understands the same plan. DrewCare brings parents, caregivers, therapists, and educators into one supportive circle.</p>
+          <div class="section-actions">
+            <a class="btn" href="#contact">Book an Assessment</a>
+            <a class="btn ghost" href="#programs">See Services</a>
+          </div>
+        </div>
+        <ul class="check-list">
+          <li><span>&#10003;</span>Individual child profiles and practical recommendations</li>
+          <li><span>&#10003;</span>Therapy goals parents can continue at home</li>
+          <li><span>&#10003;</span>Teacher support for inclusive classroom routines</li>
+          <li><span>&#10003;</span>Community awareness that reduces shame and isolation</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="impact" id="impact">
+      <div class="section-inner">
+        <div class="section-title">
+          <h2>Impact Goals</h2>
+          <p>Use these numbers as editable launch targets until DrewCare adds live program data.</p>
+        </div>
+        <div class="impact-grid">
+          <div class="impact-card">
+            <strong>500+</strong>
+            <span>children assessed yearly</span>
+          </div>
+          <div class="impact-card">
+            <strong>120+</strong>
+            <span>caregivers trained</span>
+          </div>
+          <div class="impact-card">
+            <strong>40+</strong>
+            <span>school inclusion visits</span>
+          </div>
+          <div class="impact-card">
+            <strong>25+</strong>
+            <span>volunteer specialists</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="involved" id="involved">
+      <div class="section-inner">
+        <div class="section-title">
+          <h2>Get Involved</h2>
+          <p>Mirroring strong NGO patterns, DrewCare gives donors, volunteers, partners, and families clear ways to take action.</p>
+        </div>
+        <div class="involved-grid">
+          <article class="involved-card" style="--photo: url('https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?auto=format&fit=crop&w=900&q=80');">
+            <h3>Donate to Therapy Access</h3>
+            <p>Support assessment, therapy tools, transport assistance, and inclusive learning materials.</p>
+            <a class="btn" href="#donate">Donate Now</a>
+          </article>
+          <article class="involved-card" style="--photo: url('https://images.unsplash.com/photo-1559027615-cd4628902d4a?auto=format&fit=crop&w=900&q=80');">
+            <h3>Volunteer Your Skill</h3>
+            <p>Therapists, educators, designers, storytellers, and community builders can all help.</p>
+            <a class="btn" href="#contact">Join Volunteers</a>
+          </article>
+          <article class="involved-card" style="--photo: url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=900&q=80');">
+            <h3>Partner With Schools</h3>
+            <p>Bring inclusion workshops, child screenings, and teacher support into classrooms.</p>
+            <a class="btn" href="#contact">Start Partnership</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="donate" id="donate">
+      <div class="section-inner donate-grid">
+        <div class="donate-copy">
+          <p class="eyebrow">Secure donations</p>
+          <h2>Give children access to therapy, tools, and inclusive learning.</h2>
+          <p>Your donation helps DrewCare fund special needs assessments, speech therapy, physiotherapy sessions, caregiver training, school visits, learning materials, and transport support.</p>
+          <ul class="donate-list">
+            <li><span>&#10003;</span> NGN 5,000 can support learning materials.</li>
+            <li><span>&#10003;</span> NGN 25,000 can sponsor therapy access.</li>
+            <li><span>&#10003;</span> NGN 100,000 can support a school inclusion visit.</li>
+          </ul>
+        </div>
+
+        <form class="donation-form" id="donation-form">
+          <div class="amount-presets" aria-label="Donation amount presets">
+            <button type="button" data-amount="5000">NGN 5k</button>
+            <button type="button" data-amount="10000">NGN 10k</button>
+            <button type="button" data-amount="25000" class="active">NGN 25k</button>
+            <button type="button" data-amount="100000">NGN 100k</button>
+          </div>
+
+          <label>
+            Donation amount (NGN)
+            <input type="number" name="amount" min="100" step="100" value="25000" required>
+          </label>
+
+          <div class="donation-fields">
+            <label>
+              Full name
+              <input type="text" name="name" placeholder="Donor name" required>
+            </label>
+            <label>
+              Email
+              <input type="email" name="email" placeholder="name@example.com" required>
+            </label>
+          </div>
+
+          <div class="donation-fields">
+            <label>
+              Phone
+              <input type="tel" name="phone" placeholder="+234">
+            </label>
+            <label>
+              Donation focus
+              <select name="campaign">
+                <option value="Therapy Access">Therapy Access</option>
+                <option value="Learning Materials">Learning Materials</option>
+                <option value="School Inclusion">School Inclusion</option>
+                <option value="Caregiver Training">Caregiver Training</option>
+              </select>
+            </label>
+          </div>
+
+          <p class="form-note">Payments are initialized on the server so your Paystack secret key never enters the browser.</p>
+          <button class="btn alt" type="submit">Donate With Paystack</button>
+          <p class="donation-message" id="donation-message" role="status"></p>
+        </form>
+      </div>
+    </section>
+
+    <section class="stories" id="stories">
+      <div class="section-inner">
+        <div class="section-title">
+          <h2>Stories &amp; Resources</h2>
+          <p>Keep the site active with parent resources, event updates, child success stories, and gallery moments.</p>
+        </div>
+        <div class="story-grid">
+          <article class="story-lead">
+            <img src="https://images.unsplash.com/photo-1604881991720-f91add269bed?auto=format&fit=crop&w=1200&q=80" alt="Child reading a colorful book">
+            <div class="story-body">
+              <h3>Helping a child find their voice through patient communication support</h3>
+              <p>Speech and language goals become easier when therapy is playful, consistent, and connected to everyday family routines.</p>
+              <a class="btn alt" href="#contact">Share a Story</a>
+            </div>
+          </article>
+          <div class="story-side">
+            <article class="story-mini">
+              <img src="https://images.unsplash.com/photo-1542810634-71277d95dcbb?auto=format&fit=crop&w=800&q=80" alt="Children smiling in a learning space">
+              <div>
+                <h3>Parent training day</h3>
+                <p>Caregivers learn simple home activities that support speech, focus, movement, and independence.</p>
+              </div>
+            </article>
+            <article class="story-mini">
+              <img src="https://images.unsplash.com/photo-1588075592446-265fd1e6e76f?auto=format&fit=crop&w=800&q=80" alt="Teacher supporting a child during school work">
+              <div>
+                <h3>Inclusive classroom checklist</h3>
+                <p>A practical guide for teachers building calm, structured, and accessible learning spaces.</p>
+              </div>
+            </article>
+            <article class="story-mini">
+              <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=800&q=80" alt="Children reading and learning together">
+              <div>
+                <h3>Upcoming awareness walk</h3>
+                <p>Invite families, schools, and partners to celebrate children with special care needs.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact" id="contact">
+      <div class="section-inner contact-grid">
+        <div>
+          <p class="eyebrow">Contact DrewCare</p>
+          <h2>Refer a child, support a program, or bring inclusion to your school.</h2>
+          <p>This form is ready for design preview. Connect it to email, WhatsApp, or a backend service when the foundation confirms its contact workflow.</p>
+          <ul class="contact-list">
+            <li>Email: hello@drewcarefoundation.org</li>
+            <li>Phone: +234 000 000 0000</li>
+            <li>Location: Lagos, Nigeria</li>
+            <li>Hours: Monday - Friday, 9am - 5pm</li>
+          </ul>
+        </div>
+        <form class="contact-form">
+          <label>
+            Full name
+            <input type="text" name="name" placeholder="Your name">
+          </label>
+          <label>
+            Email or phone
+            <input type="text" name="contact" placeholder="How should we reach you?">
+          </label>
+          <label>
+            I want to
+            <input type="text" name="interest" placeholder="Refer a child, donate, volunteer, partner">
+          </label>
+          <label>
+            Message
+            <textarea name="message" placeholder="Tell us what support is needed"></textarea>
+          </label>
+          <button class="btn alt" type="button">Send Message</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="section-inner footer-grid">
+      <div>
+        <h3>DrewCare Foundation</h3>
+        <p>Supporting children with special needs through assessment, therapy, caregiver training, and school inclusion programs.</p>
+      </div>
+      <div>
+        <h3>Quick Links</h3>
+        <div class="footer-links">
+          <a href="#about">About Us</a>
+          <a href="#programs">What We Do</a>
+          <a href="#involved">Get Involved</a>
+          <a href="#stories">Resources</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </div>
+      <div>
+        <h3>Newsletter</h3>
+        <form class="newsletter">
+          <input type="email" placeholder="Email address">
+          <button class="btn" type="button">Subscribe</button>
+        </form>
+      </div>
+    </div>
+    <div class="copyright">Copyright &copy; 2026 DrewCare Foundation. All rights reserved.</div>
+  </footer>
+
+  <script>
+    const navToggle = document.querySelector(".nav-toggle");
+    const navMenu = document.querySelector(".nav-menu");
+    const donationForm = document.querySelector("#donation-form");
+    const donationMessage = document.querySelector("#donation-message");
+    const amountInput = donationForm?.elements.amount;
+
+    navToggle.addEventListener("click", () => {
+      const isOpen = navMenu.classList.toggle("open");
+      navToggle.classList.toggle("open", isOpen);
+      navToggle.setAttribute("aria-expanded", String(isOpen));
+    });
+
+    navMenu.addEventListener("click", (event) => {
+      if (event.target.matches("a") && window.innerWidth <= 840) {
+        navMenu.classList.remove("open");
+        navToggle.classList.remove("open");
+        navToggle.setAttribute("aria-expanded", "false");
+      }
+    });
+
+    document.querySelectorAll("[data-amount]").forEach((button) => {
+      button.addEventListener("click", () => {
+        document.querySelectorAll("[data-amount]").forEach((item) => item.classList.remove("active"));
+        button.classList.add("active");
+        amountInput.value = button.dataset.amount;
+      });
+    });
+
+    amountInput?.addEventListener("input", () => {
+      document.querySelectorAll("[data-amount]").forEach((button) => {
+        button.classList.toggle("active", button.dataset.amount === amountInput.value);
+      });
+    });
+
+    donationForm?.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const submitButton = donationForm.querySelector("button[type='submit']");
+      const formData = new FormData(donationForm);
+      const amount = Number(formData.get("amount"));
+
+      if (!Number.isFinite(amount) || amount < 100) {
+        donationMessage.textContent = "Please enter at least NGN 100.";
+        return;
+      }
+
+      donationMessage.textContent = "Opening secure Paystack checkout...";
+      submitButton.disabled = true;
+
+      try {
+        const response = await fetch("/api/donations/initialize", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            amount,
+            name: formData.get("name"),
+            email: formData.get("email"),
+            phone: formData.get("phone"),
+            campaign: formData.get("campaign")
+          })
+        });
+
+        const payload = await response.json();
+
+        if (!response.ok || !payload.authorizationUrl) {
+          throw new Error(payload.error || "Unable to initialize payment.");
+        }
+
+        window.location.href = payload.authorizationUrl;
+      } catch (error) {
+        donationMessage.textContent = `${error.message} Start the site with npm run dev and set PAYSTACK_SECRET_KEY in .env.`;
+        submitButton.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Donation Status | DrewCare Foundation</title>
+  <style>
+    :root {
+      --navy: #11375c;
+      --yellow: #ffd23f;
+      --pink: #ff5fa2;
+      --cyan: #00bcd4;
+      --green: #40c057;
+      --cream: #fff8e8;
+      --ink: #1b2633;
+      --muted: #5e6b78;
+      --white: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      margin: 0;
+      padding: 24px;
+      color: var(--ink);
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        linear-gradient(135deg, rgba(255, 210, 63, 0.86), rgba(0, 188, 212, 0.72), rgba(255, 95, 162, 0.78)),
+        url("https://images.unsplash.com/photo-1497486751825-1233686d5d80?auto=format&fit=crop&w=1800&q=80") center/cover;
+    }
+
+    main {
+      width: min(680px, 100%);
+      padding: 30px;
+      border-radius: 8px;
+      background: var(--white);
+      box-shadow: 0 22px 60px rgba(17, 55, 92, 0.22);
+    }
+
+    .mark {
+      display: grid;
+      place-items: center;
+      width: 58px;
+      height: 58px;
+      margin-bottom: 18px;
+      border-radius: 8px;
+      color: var(--navy);
+      background: var(--yellow);
+      border: 4px solid var(--cyan);
+      box-shadow: 5px 5px 0 var(--green);
+      font-weight: 900;
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      color: var(--navy);
+      font-size: clamp(2rem, 6vw, 4rem);
+      line-height: 1;
+    }
+
+    p {
+      color: var(--muted);
+      font-weight: 800;
+      line-height: 1.6;
+    }
+
+    dl {
+      display: grid;
+      grid-template-columns: 150px 1fr;
+      gap: 10px 16px;
+      margin: 22px 0;
+      padding: 18px;
+      border-radius: 8px;
+      background: var(--cream);
+    }
+
+    dt {
+      color: var(--navy);
+      font-weight: 900;
+    }
+
+    dd {
+      margin: 0;
+      color: var(--ink);
+      font-weight: 800;
+      overflow-wrap: anywhere;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 12px 20px;
+      border-radius: 8px;
+      color: var(--white);
+      background: var(--pink);
+      font-weight: 900;
+      text-decoration: none;
+      box-shadow: 6px 6px 0 var(--yellow);
+    }
+
+    @media (max-width: 520px) {
+      dl {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="mark">DC</div>
+    <h1 id="status-title">Checking donation...</h1>
+    <p id="status-copy">Please wait while we confirm your Paystack transaction.</p>
+    <dl id="donation-details" hidden>
+      <dt>Reference</dt>
+      <dd id="reference"></dd>
+      <dt>Amount</dt>
+      <dd id="amount"></dd>
+      <dt>Focus</dt>
+      <dd id="campaign"></dd>
+      <dt>Paid at</dt>
+      <dd id="paid-at"></dd>
+    </dl>
+    <a class="btn" href="/">Back to DrewCare</a>
+  </main>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const reference = params.get("reference") || params.get("trxref");
+    const title = document.querySelector("#status-title");
+    const copy = document.querySelector("#status-copy");
+    const details = document.querySelector("#donation-details");
+
+    async function verifyDonation() {
+      if (!reference) {
+        title.textContent = "Payment reference missing";
+        copy.textContent = "Paystack did not return a payment reference. Please contact DrewCare if you were charged.";
+        return;
+      }
+
+      try {
+        const response = await fetch(`/api/donations/verify?reference=${encodeURIComponent(reference)}`);
+        const payload = await response.json();
+
+        if (!response.ok) {
+          throw new Error(payload.error || "Unable to verify donation.");
+        }
+
+        if (payload.status === "success") {
+          title.textContent = "Thank you for donating!";
+          copy.textContent = "Your donation has been received and verified. DrewCare Foundation appreciates your support.";
+        } else {
+          title.textContent = "Donation not completed";
+          copy.textContent = `Paystack returned status: ${payload.status}. If money left your account, contact DrewCare with the reference below.`;
+        }
+
+        document.querySelector("#reference").textContent = payload.reference || reference;
+        document.querySelector("#amount").textContent = `${payload.currency || "NGN"} ${Number(payload.amount || 0).toLocaleString()}`;
+        document.querySelector("#campaign").textContent = payload.campaign || "General Donation";
+        document.querySelector("#paid-at").textContent = payload.paidAt ? new Date(payload.paidAt).toLocaleString() : "Not confirmed";
+        details.hidden = false;
+      } catch (error) {
+        title.textContent = "Could not verify donation";
+        copy.textContent = `${error.message} Make sure the site is running through npm run dev and PAYSTACK_SECRET_KEY is set in .env.`;
+      }
+    }
+
+    verifyDonation();
+  </script>
+</body>
+</html>

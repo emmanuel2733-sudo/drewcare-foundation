@@ -1,0 +1,13 @@
+{
+  "name": "drewcare-foundation",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Static DrewCare Foundation website with Paystack donation endpoints.",
+  "scripts": {
+    "dev": "node server.js",
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
