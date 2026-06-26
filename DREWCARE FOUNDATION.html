@@ -362,11 +362,10 @@
     }
 
     .hero-ribbon {
-      --ribbon-box-width: 320px;
-      width: min(calc(var(--ribbon-box-width) * 4), calc(100% - 32px));
+      width: min(1180px, calc(100% - 32px));
       margin: 42px auto -54px;
       display: grid;
-      grid-template-columns: repeat(4, var(--ribbon-box-width));
+      grid-template-columns: repeat(4, minmax(0, 1fr));
       border-radius: 8px;
       overflow: hidden;
       box-shadow: var(--shadow);
@@ -375,18 +374,20 @@
     .ribbon-item {
       display: flex;
       align-items: center;
-      gap: 14px;
-      min-height: 116px;
+      justify-content: center;
+      gap: 8px;
+      min-height: 96px;
       min-width: 0;
-      padding: 18px 16px;
+      padding: 14px 10px;
       color: var(--navy);
       background: var(--yellow);
-      font-size: 1rem;
+      font-size: clamp(0.72rem, 1vw, 0.92rem);
       font-weight: 900;
       line-height: 1.16;
       overflow-wrap: normal;
       word-break: normal;
       white-space: nowrap;
+      text-align: center;
     }
 
     .ribbon-item:nth-child(2) {
@@ -407,7 +408,7 @@
     .ribbon-item span {
       display: inline-block;
       flex: 0 0 auto;
-      font-size: 1.65rem;
+      font-size: clamp(1rem, 1.35vw, 1.35rem);
       line-height: 1;
     }
 
@@ -994,7 +995,7 @@
       color: var(--white);
     }
 
-    @media (max-width: 1320px) {
+    @media (max-width: 920px) {
       .hero-ribbon {
         width: min(760px, calc(100% - 32px));
         grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1101,10 +1102,10 @@
       }
 
       .ribbon-item {
-        gap: 4px;
+        gap: 5px;
         min-height: 88px;
-        padding: 12px 6px;
-        font-size: clamp(0.5rem, 2.15vw, 0.72rem);
+        padding: 12px 7px;
+        font-size: clamp(0.56rem, 2.35vw, 0.74rem);
       }
 
       .ribbon-item span {
