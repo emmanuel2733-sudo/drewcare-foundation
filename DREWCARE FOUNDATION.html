@@ -362,10 +362,10 @@
     }
 
     .hero-ribbon {
-      width: min(760px, calc(100% - 32px));
+      width: min(1180px, calc(100% - 32px));
       margin: 42px auto -54px;
       display: grid;
-      grid-template-columns: 1fr;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
       border-radius: 8px;
       overflow: hidden;
       box-shadow: var(--shadow);
@@ -377,14 +377,15 @@
       gap: 14px;
       min-height: 116px;
       min-width: 0;
-      padding: 18px 22px;
+      padding: 18px 16px;
       color: var(--navy);
       background: var(--yellow);
-      font-size: clamp(1rem, 2.2vw, 1.18rem);
+      font-size: clamp(0.9rem, 1.1vw, 1rem);
       font-weight: 900;
-      line-height: 1.22;
+      line-height: 1.16;
       overflow-wrap: normal;
       word-break: normal;
+      white-space: nowrap;
     }
 
     .ribbon-item:nth-child(2) {
@@ -1000,6 +1001,10 @@
       .impact-grid {
         grid-template-columns: repeat(2, 1fr);
       }
+
+      .hero-ribbon {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
     }
 
     @media (max-width: 840px) {
@@ -1091,11 +1096,21 @@
         font-size: 0.68rem;
       }
 
+      .ribbon-item {
+        gap: 6px;
+        min-height: 88px;
+        padding: 12px 8px;
+        font-size: clamp(0.64rem, 2.8vw, 0.82rem);
+      }
+
+      .ribbon-item span {
+        font-size: 1rem;
+      }
+
       h1 {
         font-size: 3rem;
       }
 
-      .hero-ribbon,
       .impact-grid {
         grid-template-columns: 1fr;
       }
