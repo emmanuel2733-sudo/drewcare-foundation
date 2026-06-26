@@ -362,10 +362,11 @@
     }
 
     .hero-ribbon {
-      width: min(1180px, calc(100% - 32px));
+      --ribbon-box-width: 320px;
+      width: min(calc(var(--ribbon-box-width) * 4), calc(100% - 32px));
       margin: 42px auto -54px;
       display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
+      grid-template-columns: repeat(4, var(--ribbon-box-width));
       border-radius: 8px;
       overflow: hidden;
       box-shadow: var(--shadow);
@@ -380,7 +381,7 @@
       padding: 18px 16px;
       color: var(--navy);
       background: var(--yellow);
-      font-size: clamp(0.9rem, 1.1vw, 1rem);
+      font-size: 1rem;
       font-weight: 900;
       line-height: 1.16;
       overflow-wrap: normal;
@@ -993,6 +994,13 @@
       color: var(--white);
     }
 
+    @media (max-width: 1320px) {
+      .hero-ribbon {
+        width: min(760px, calc(100% - 32px));
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
     @media (max-width: 1060px) {
       .program-grid {
         grid-template-columns: repeat(3, 1fr);
@@ -1000,10 +1008,6 @@
 
       .impact-grid {
         grid-template-columns: repeat(2, 1fr);
-      }
-
-      .hero-ribbon {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
     }
 
@@ -1097,10 +1101,10 @@
       }
 
       .ribbon-item {
-        gap: 6px;
+        gap: 4px;
         min-height: 88px;
-        padding: 12px 8px;
-        font-size: clamp(0.64rem, 2.8vw, 0.82rem);
+        padding: 12px 6px;
+        font-size: clamp(0.5rem, 2.15vw, 0.72rem);
       }
 
       .ribbon-item span {
