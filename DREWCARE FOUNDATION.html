@@ -362,25 +362,28 @@
     }
 
     .hero-ribbon {
-      width: min(1180px, calc(100% - 32px));
+      width: min(760px, calc(100% - 32px));
       margin: 42px auto -54px;
       display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
+      grid-template-columns: 1fr;
       border-radius: 8px;
       overflow: hidden;
       box-shadow: var(--shadow);
     }
 
     .ribbon-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
       min-height: 116px;
       min-width: 0;
-      padding: 18px 16px;
+      padding: 18px 22px;
       color: var(--navy);
       background: var(--yellow);
-      font-size: clamp(0.95rem, 1.25vw, 1.08rem);
+      font-size: clamp(1rem, 2.2vw, 1.18rem);
       font-weight: 900;
       line-height: 1.22;
-      overflow-wrap: anywhere;
+      overflow-wrap: normal;
       word-break: normal;
     }
 
@@ -400,7 +403,8 @@
     }
 
     .ribbon-item span {
-      display: block;
+      display: inline-block;
+      flex: 0 0 auto;
       font-size: 1.65rem;
       line-height: 1;
     }
@@ -976,6 +980,17 @@
       text-align: center;
     }
 
+    .credit {
+      display: block;
+      margin-top: 8px;
+      color: var(--yellow);
+      font-weight: 900;
+    }
+
+    .credit:hover {
+      color: var(--white);
+    }
+
     @media (max-width: 1060px) {
       .program-grid {
         grid-template-columns: repeat(3, 1fr);
@@ -1050,10 +1065,6 @@
 
       .about {
         padding-top: 120px;
-      }
-
-      .hero-ribbon {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
       .involved-grid,
@@ -1494,7 +1505,10 @@
         </form>
       </div>
     </div>
-    <div class="copyright">Copyright &copy; 2026 DrewCare Foundation. All rights reserved.</div>
+    <div class="copyright">
+      Copyright &copy; 2026 DrewCare Foundation. All rights reserved.
+      <a class="credit" href="mailto:lytebridgeinfo@gmail.com">Design by LYTEBRIDGE</a>
+    </div>
   </footer>
 
   <script>
